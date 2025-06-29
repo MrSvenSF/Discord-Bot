@@ -1,0 +1,29 @@
+Module:
+  messages:
+    Welcome: false
+    List: false
+
+  Moderate:
+    AutoMod: false # das richtet automatisch die discord Sicherheitssystem ein
+
+    AntiSpam: false
+    AutoDelete: false
+
+    Logs: false
+
+    Tickets: false
+
+  Channels:
+    save: false
+    Load: false
+
+    Backups: false
+
+  Notifications:
+    YouTube: false
+    Twitch: false
+    Tiktok: false
+
+  TempChannels:
+    Voice: false
+    Text: false
