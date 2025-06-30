@@ -13,11 +13,8 @@ async def on_ready():
     print(f"  {bot.user.name}")
     print(f"")
 
-# Versuche zuerst ../Config/.env, dann .env im aktuellen Verzeichnis
-load_dotenv(dotenv_path="src/.env")
+load_dotenv(dotenv_path="Config/.env")
 load_dotenv(dotenv_path=".env")
-
 token = os.getenv("token")
 
 bot.run(token)
-
