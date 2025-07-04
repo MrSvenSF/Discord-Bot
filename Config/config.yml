@@ -1,28 +1,33 @@
-Tools:
-  App:
-    Welcome: false
-    List: false
+Welcome: true
+List: false
 
-  Admin:
-    #AutoMod: false # das richtet automatisch die discord Sicherheitssystem ein
-    AutoDelete: false
+# AutoMod: false
+AutoDelete: false
+AntiSpam: false
 
-    #AntiSpam: false
+Logs: false
 
-    Logs: false
+Tickets: false
 
-    Tickets: false
+# Channels: false
 
-    #Channels:
-    #  save: false
-    #  Load: false
+# Messages: false
 
-    #  Backups: false
-#  Messages:
-#    YouTube: false
-#    Twitch: false
-#    Tiktok: false
+# Temp: false
 
-#  Temp:
-#    Voice: false
-#    Text: false
+in:
+  Welcome: Tools/App/Welcome.py
+  List: Tools/App/List.py
+
+  # AutoMod: Tools/Admin/Auto/AutoMod.py
+  AutoDelete: Tools/Admin/Auto/AutoDelete.py
+  AntiSpam: Tools/Admin/Auto/AntiSpam.py
+
+  Logs: Tools/Admin/Logs/Logs.py
+
+  Tickets: Tools/Admin/Tickets/Tickets.py
+
+  # Channels: Tools/Admin/Channels/Channels.py
+  # Messages: Tools/Admin/Messages/Messages.py
+
+  # Temp: Tools/Temp/Temp.py
