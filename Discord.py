@@ -14,7 +14,15 @@ async def on_ready():
     print(f"Online ---------------------------------------")
     print(f"{bot.user} is ready and online!")
     print(f"")
-
+    
+load_dotenv(dotenv_path="Config/.env")
+token = os.getenv("token")
+if not token:
+    print("-------Token-Error-------")
+    print("Token not found in .env file. Please set the token.")
+    print("token=<your_token_here>")
+    print("exiting...")
+    exit(1)
 
 
 with open("Config/config-Tools.yml", "r", encoding="utf-8") as f:
