@@ -1,0 +1,16 @@
+Welcome: true
+List: false
+
+AutoDelete: false
+AntiSpam: false
+
+Tickets: false
+
+in:
+  Welcome: Tools.App.Welcome
+  List: Tools.App.List
+
+  AutoDelete: Tools.Admin.Auto.AutoDelete
+  AntiSpam: Tools.Admin.Auto.AntiSpam
+
+  Tickets: Tools.Admin.Tickets.Tickets
