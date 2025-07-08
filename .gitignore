@@ -1,1 +1,9 @@
 Config/.env
+
+
+Tools/__pycache__/Test.cpython-312.pyc
+Tools/App/__pycache__/Welcome.cpython-312.pyc
+Tools/App/__pycache__/List.cpython-312.pyc
+Tools/Admin/Auto/__pycache__/AntiSpam.cpython-312.pyc
+Tools/Admin/Auto/__pycache__/AutoDelete.cpython-312.pyc
+Tools/Admin/Tickets/__pycache__/Tickets.cpython-312.pyc

@@ -1,12 +1,16 @@
+Test: true
+
 Welcome: true
-List: false
+List: true
 
-AutoDelete: false
-AntiSpam: false
+AutoDelete: true
+AntiSpam: true
 
-Tickets: false
+Tickets: true
 
 in:
+  Test: Tools.Test
+
   Welcome: Tools.App.Welcome
   List: Tools.App.List
 

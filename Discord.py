@@ -1,10 +1,7 @@
 import discord
-import os # default module
+import os
 from dotenv import load_dotenv
 import yaml
-
-
-load_dotenv(dotenv_path="Config/.env")
 
 bot = discord.Bot()
 loaded_cogs = set()
@@ -20,6 +17,7 @@ token = os.getenv("token")
 if not token:
     print("-------Token-Error-------")
     print("Token not found in .env file. Please set the token.")
+    print("create a .env file in the Config folder with the following content:")
     print("token=<your_token_here>")
     print("exiting...")
     exit(1)
