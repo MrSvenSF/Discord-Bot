@@ -29,34 +29,64 @@ if not token:
 # end Load .env (token)
 
 
-# test command
-@bot.slash_command(name="hello", description="Say hello to the bot")
-async def hello(ctx: discord.ApplicationContext):
-    await ctx.respond("Hey!")
-# end test command
+# Load config
+config_path = "config/config.yml"
+with open(config_path, "r", encoding="utf-8") as f:
+    config = yaml.safe_load(f)
 
 
-bot.run(os.getenv("token"))
+modules_cfg = config.get("modules", [])
 
-# --- start of module loading ---
-#config_path = "config/config.yml"
+import importlib.util
 
-#with open(config_path, "r", encoding="utf-8") as f:
-#    config = yaml.safe_load(f)
+# Lade Module, deren Einträge in config/config.yml aufgelistet sind.
+# Die Pfade werden relativ zur config-Datei aufgelöst.
+for mod in modules_cfg:
+    name = mod.get("name")
+    enabled = mod.get("enabled", False)
+    path = mod.get("path")
 
-#for key, enabled in config.items():
-#    if isinstance(enabled, bool) and enabled:
-#        module_path = config.get("in", {}).get(key)
-#        if module_path and os.path.exists(module_path):
-#            spec = importlib.util.spec_from_file_location(key, module_path)
-#            module = importlib.util.module_from_spec(spec)
-#            spec.loader.exec_module(module)
-#            print("-------------Modul-load-------------")
-#            print(f"Modul {module_path} geladen.")
-#            print("")
-#        elif module_path:
-#            print("-------------Modul-Error-------------")
-#            print(f"Modul {module_path} nicht gefunden.")
-#            print("")
+    if not enabled:
+        continue
 
-# --- end of module loading ---
+    if not path:
+        print("-------------Modul-Error-------------")
+        print(f"Modul {name} hat keinen Pfad; übersprungen.")
+        print("")
+        continue
+
+    # Pfad relativ zur config.yml auflösen
+    module_path = os.path.normpath(os.path.join(os.path.dirname(config_path), path))
+
+    if not os.path.exists(module_path):
+        print("-------------Modul-Error-------------")
+        print(f"Modul {module_path} nicht gefunden.")
+        print("")
+        continue
+
+    try:
+        spec = importlib.util.spec_from_file_location(name, module_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        # Wenn das Modul eine setup(bot)-Funktion hat, rufe sie auf
+        if hasattr(module, "setup"):
+            try:
+                module.setup(bot)
+                print("-------------Modul-load-------------")
+                print(f"Modul {module_path} geladen via setup().")
+                print("")
+            except Exception as e:
+                print("-------------Modul-Error-------------")
+                print(f"Fehler beim Ausführen von setup() in {module_path}: {e}")
+                print("")
+        else:
+            print("-------------Modul-load-------------")
+            print(f"Modul {module_path} geladen (keine setup()-Funktion).")
+            print("")
+    except Exception as e:
+        print("-------------Modul-Error-------------")
+        print(f"Fehler beim Laden von {module_path}: {e}")
+        print("")
+
+bot.run(token)
