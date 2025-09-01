@@ -2,7 +2,7 @@
 import discord
 import os 
 from dotenv import load_dotenv
-import yaml
+import json
 
 bot = discord.Bot()
 
@@ -29,11 +29,23 @@ if not token:
 # end Load .env (token)
 
 
-# Load config
-config_path = "config/config.yml"
-with open(config_path, "r", encoding="utf-8") as f:
-    config = yaml.safe_load(f)
+# Load config (JSON)
+config_path = "config/config.json"
+if not os.path.exists(config_path):
+    print("-------Config-Error-------")
+    print(f"Config-Datei {config_path} nicht gefunden.")
+    print("Bitte erstelle eine config/config.json (siehe config/config.json.example).")
+    print("exiting...")
+    exit(1)
 
+with open(config_path, "r", encoding="utf-8") as f:
+    try:
+        config = json.load(f)
+    except Exception as e:
+        print("-------Config-Error-------")
+        print(f"Fehler beim Lesen der JSON-Konfiguration: {e}")
+        print("exiting...")
+        exit(1)
 
 modules_cfg = config.get("modules", [])
 

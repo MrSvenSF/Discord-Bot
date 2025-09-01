@@ -1,0 +1,14 @@
+{
+    "modules": [
+        {
+            "name": "Test",
+            "enabled": true,
+            "path": "../modules/Test.py"
+        },
+        {
+            "name": "Test2",
+            "enabled": false,
+            "path": "../modules/Test2.py"
+        }
+    ]
+}
