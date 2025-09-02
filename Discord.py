@@ -28,6 +28,7 @@ if not token:
     exit(1)
 # end Load .env (token)
 
+#---------------------------------------------------------------------------------------------------------------
 
 # Load config (JSON)
 config_path = "config/config.json"
@@ -100,5 +101,7 @@ for mod in modules_cfg:
         print("-------------Modul-Error-------------")
         print(f"Fehler beim Laden von {module_path}: {e}")
         print("")
+
+#---------------------------------------------------------------------------------------------------------------
 
 bot.run(token)
